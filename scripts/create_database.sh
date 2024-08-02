@@ -1,0 +1,26 @@
+#!/bin/bash
+
+export $(grep -v '^#' .env | xargs)
+
+MYSQL_ROOT_USER="root"
+MYSQL_ROOT_PASSWORD="root"
+MYSQL_HOST="${DB_HOST}"
+MYSQL_PORT="${DB_PORT}"
+DATABASE_NAME="${DB_DATABASE}"
+MYSQL_USER="${DB_USERNAME}"
+MYSQL_USER_PASSWORD="${DB_PASSWORD}"
+
+CREATE_DATABASE_QUERY="CREATE DATABASE IF NOT EXISTS \`${DATABASE_NAME}\`;"
+CREATE_USER_QUERY="CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_USER_PASSWORD}';"
+GRANT_PRIVILEGES_QUERY="GRANT ALL PRIVILEGES ON \`${DATABASE_NAME}\`.* TO '${MYSQL_USER}'@'localhost';"
+
+mysql -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} -h${MYSQL_HOST} -P${MYSQL_PORT} -e "${CREATE_DATABASE_QUERY}"
+mysql -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} -h${MYSQL_HOST} -P${MYSQL_PORT} -e "${CREATE_USER_QUERY}"
+mysql -u${MYSQL_ROOT_USER} -p${MYSQL_ROOT_PASSWORD} -h${MYSQL_HOST} -P${MYSQL_PORT} -e "${GRANT_PRIVILEGES_QUERY}"
+
+if [ $? -eq 0 ]; then
+  echo "User ${MYSQL_USER} created and granted privileges successfully."
+  echo "Database ${DATABASE_NAME} created successfully."
+else
+  echo "Failed to create the user or database."
+fi
