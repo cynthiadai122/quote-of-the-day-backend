@@ -38,9 +38,6 @@ jobs:
     - name: Install Composer dependencies
       run: composer install --no-interaction --prefer-dist --no-scripts --no-progress --no-dev
 
-    - name: Copy .env.testing
-      run: cp .env.testing .env
-
     - name: Run Laravel migrations
       run: php artisan migrate --force
 
