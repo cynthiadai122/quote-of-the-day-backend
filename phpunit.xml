@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="bootstrap/app.php">
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    stopOnFailure="false"
+    executionOrder="defects"
+    failOnRisky="true"
+    failOnWarning="true"
+    >
     <testsuites>
         <testsuite name="Application Test Suite">
-            <directory>./tests/Feature</directory>
-            <directory>./tests/Unit</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    <coverage>
-        <include>
-            <directory>app</directory>
-        </include>
-    </coverage>
-    <logging>
-        <log type="coverage-html" target="storage/coverage" />
-    </logging>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="quote_of_the_day_testing"/>
+        <env name="DB_USERNAME" value="laravel"/>
+        <env name="DB_PASSWORD" value="password"/>
+    </php>
 </phpunit>
+
