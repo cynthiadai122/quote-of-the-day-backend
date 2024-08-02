@@ -7,13 +7,13 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev \
     libzip-dev \
     libicu-dev \
     g++ \
     zlib1g-dev \
     libonig-dev \
     libcurl4-openssl-dev \
+    default-mysql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install pdo pdo_mysql \
