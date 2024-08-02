@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: quote_of_the_day
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, gd, mysqli, pdo_mysql
+        coverage: xdebug
+
+    - name: Install Composer dependencies
+      run: composer install --no-interaction --prefer-dist --no-scripts --no-progress --no-dev
+
+    - name: Run Laravel migrations
+      run: php artisan migrate --force
+
+    - name: Run tests
+      run: php artisan test --env=testing
