@@ -17,7 +17,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: quote_of_the_day
+          MYSQL_DATABASE: quote_of_the_day_testing
           MYSQL_USER: laravel
           MYSQL_PASSWORD: password
         ports:
@@ -43,6 +43,6 @@ jobs:
 
     - name: Run Laravel migrations
       run: php artisan migrate --force
-      
+
     - name: Run tests
       run: vendor/bin/phpunit --env=testing
