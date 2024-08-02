@@ -37,9 +37,12 @@ jobs:
 
     - name: Install Composer dependencies
       run: composer install
+    
+    - name: Copy .env.testing to .env
+      run: cp .env.testing .env
 
     - name: Run Laravel migrations
       run: php artisan migrate --force
-
+      
     - name: Run tests
       run: vendor/bin/phpunit --env=testing
