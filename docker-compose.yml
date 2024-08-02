@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+    app:
+        image: laravel
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/html
