@@ -1,0 +1,33 @@
+Quote of the day
+Objective:
+Build a web application that shows quote of the day upon user login. User should be able to
+customize quote categories they see after login. If the user logs in after a few days, then the
+home screen should show an option to go through the quotes missed since last login. User
+should be able to mark a quote as favourite and it should appear in a favourite list.
+API: https://theysaidso.com/api/#qod
+Important Features:
+1. User registration and login.
+2. Home page shows the quote of the day after login.
+3. A customize button that shows available categories from which user can select their
+favourite.
+4. If more than one favourite category is selected, then a random category should be
+used to show the quote of the day.
+5. After login, the user should have an option to go through the quotes missed since
+last login.
+6. User should be able mark/unmark a quote as favourite and it should appear on a
+favourites page.
+Frameworks:
+• Laravel
+• Vue.js
+Evaluate:
+1. Laravel competency
+2. Vue.js competency
+3. Eloquent ORM
+4. Scheduled Jobs
+5. User Authentication
+6. Testing
+Deliverables:
+A zip file with:
+1. Laravel project
+2. Vue.js project
+3. Text file with instructions to build and run both projects
