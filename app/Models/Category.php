@@ -13,4 +13,7 @@ class Category extends Model
     public function quotes(){
         return $this->hasMany(Quote::class);
     }
+    public function users(){
+        return $this->belongsToMany(User::class,'user_categories')->withTimestamps();
+    }
 }
