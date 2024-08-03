@@ -12,6 +12,66 @@ class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_user_can_register_with_valid_data()
+    {
+        $response = $this->postJson('/api/register', [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
+
+        $response->assertStatus(201)
+                 ->assertJsonStructure(['token']);
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'john@example.com',
+        ]);
+    }
+
+    public function test_user_cannot_register_with_invalid_email()
+    {
+        $response = $this->postJson('/api/register', [
+            'name' => 'John Doe',
+            'email' => 'not-an-email',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
+
+        $response->assertStatus(422)
+                 ->assertJsonValidationErrors('email');
+    }
+
+    public function test_user_cannot_register_with_existing_email()
+    {
+        User::factory()->create([
+            'email' => 'john@example.com',
+        ]);
+
+        $response = $this->postJson('/api/register', [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
+
+        $response->assertStatus(422)
+                 ->assertJsonValidationErrors('email');
+    }
+
+    public function test_user_cannot_register_with_unconfirmed_password()
+    {
+        $response = $this->postJson('/api/register', [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => 'password123',
+            'password_confirmation' => 'differentpassword',
+        ]);
+
+        $response->assertStatus(422)
+                 ->assertJsonValidationErrors('password');
+    }
+    
     public function test_user_can_login_with_valid_credentials()
     {
         $user = User::factory()->create([
