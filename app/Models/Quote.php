@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Quote extends Model
 {
     use HasFactory;
-    protected $fillable = ['quote','author','category_id'];
-    public function category() {
+
+    protected $fillable = ['quote', 'author', 'category_id'];
+
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 }

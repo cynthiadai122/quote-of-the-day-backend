@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
-use App\Models\User;
 use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
@@ -22,7 +22,7 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonStructure(['token']);
+            ->assertJsonStructure(['token']);
 
         $this->assertDatabaseHas('users', [
             'email' => 'john@example.com',
@@ -39,7 +39,7 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonValidationErrors('email');
+            ->assertJsonValidationErrors('email');
     }
 
     public function test_user_cannot_register_with_existing_email()
@@ -56,7 +56,7 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonValidationErrors('email');
+            ->assertJsonValidationErrors('email');
     }
 
     public function test_user_cannot_register_with_unconfirmed_password()
@@ -69,9 +69,9 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonValidationErrors('password');
+            ->assertJsonValidationErrors('password');
     }
-    
+
     public function test_user_can_login_with_valid_credentials()
     {
         $user = User::factory()->create([
@@ -84,7 +84,7 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure(['token']);
+            ->assertJsonStructure(['token']);
     }
 
     public function test_user_cannot_login_with_invalid_credentials()
@@ -95,7 +95,7 @@ class AuthControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonValidationErrors('email');
+            ->assertJsonValidationErrors('email');
     }
 
     public function test_user_can_logout()
@@ -107,11 +107,11 @@ class AuthControllerTest extends TestCase
 
         Sanctum::actingAs($user);
         $response = $this->postJson('/api/logout', [], [
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson(['message' => 'Logged out successfully']);
+            ->assertJson(['message' => 'Logged out successfully']);
     }
 
     public function test_user_cannot_access_logout_without_token()
