@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only('index');
+        $this->middleware('auth:sanctum')->only('update');
     }
 
     public function index(){
@@ -24,15 +24,14 @@ class CategoryController extends Controller
         $categoryIds = $request->input('categories',[]);
         UserCategory::where('user_id',$user->id)->delete();
 
-        foreach($categoryIds as $category){
+        foreach($categoryIds as $categoryId){
             UserCategory::create([
                 'user_id' => $user->id,
-                'category_id'=> $category->id
+                'category_id'=> $categoryId
             ]);
         }
         return response()->json([
             'message'=> 'Preferences updated succussfully!'
-        ]);
-
+        ],200);
     }
 }
