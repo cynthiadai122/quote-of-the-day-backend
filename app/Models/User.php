@@ -33,7 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function categories()
+    public function favoriteCategories()
     {
         return $this->belongsToMany(Category::class, 'user_categories')->withTimeStamps();
     }

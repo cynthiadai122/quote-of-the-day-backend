@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Quote;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class QuoteService
 {
@@ -20,30 +21,43 @@ class QuoteService
 
     public function getQuoteOfTheDay($category = 'inspire')
     {
-        $response = $this->client->request('GET', 'https://quotes.rest/qod', [
-            'query' => ['category' => $category],
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'X-Theysaidso-Api-Secret' => $this->apiKey,
-            ],
-        ]);
-        $data = json_decode($response->getBody()->getContents(), true);
-        $quoteData = $data['content']['quotes'][0] ?? null;
-        if ($quoteData) {
-            $quote = Quote::create([
-                'quote' => $quoteData['quote'],
-                'author' => $quoteData['author'],
-                'length' => $quoteData['length'],
-                'language' => $quoteData['language'],
-                'tags' => json_encode($quoteData['tags']),
-                'permalink' => $quoteData['permalink'],
-                'title' => $quoteData['title'],
-                'background' => $quoteData['background'],
-                'date' => $quoteData['date'],
-                'category_id' => $this->getCategoryId($quoteData['category']),
+        try {
+            $response = $this->client->request('GET', 'https://quotes.rest/qod', [
+                'query' => ['category' => $category],
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'X-Theysaidso-Api-Secret' => $this->apiKey,
+                ],
             ]);
 
-            return $quote;
+            $responseBody = $response->getBody()->getContents();
+
+            Log::info('API Response Body: '.$responseBody);
+
+            $data = json_decode($responseBody, true);
+
+            Log::info('Decoded API Response: ', $data);
+
+            $quoteData = $data['contents']['quotes'][0] ?? null;
+
+            if ($quoteData) {
+                $quote = Quote::create([
+                    'quote' => $quoteData['quote'],
+                    'author' => $quoteData['author'],
+                    'length' => $quoteData['length'],
+                    'language' => $quoteData['language'],
+                    'tags' => json_encode($quoteData['tags']),
+                    'permalink' => $quoteData['permalink'],
+                    'title' => $quoteData['title'],
+                    'background' => $quoteData['background'],
+                    'date' => $quoteData['date'],
+                    'category_id' => $this->getCategoryId($quoteData['category']),
+                ]);
+
+                return $quote;
+            }
+        } catch (\Exception $e) {
+            Log::error('Error fetching quote: '.$e->getMessage());
         }
 
         return null;

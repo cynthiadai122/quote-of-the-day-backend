@@ -32,7 +32,7 @@ class QuoteServiceTest extends TestCase
             200,
             [],
             json_encode([
-                'content' => [
+                'contents' => [
                     'quotes' => [
                         [
                             'quote' => 'Sample quote',
