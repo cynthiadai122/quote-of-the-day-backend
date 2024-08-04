@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Favoriate extends Model
+class Favorite extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'quote_id'];
 }
