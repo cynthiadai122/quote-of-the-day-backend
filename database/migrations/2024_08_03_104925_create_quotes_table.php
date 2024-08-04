@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('quote');
             $table->string('author');
+            $table->integer('length');
+            $table->string('language');
+            $table->json('tags');
+            $table->string('permalink');
+            $table->string('title');
+            $table->string('background');
+            $table->date('date');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

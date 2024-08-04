@@ -9,10 +9,26 @@ class Quote extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['quote', 'author', 'category_id'];
+    protected $fillable = [
+        'quote',
+        'author',
+        'length',
+        'language',
+        'tags',
+        'permalink',
+        'title',
+        'background',
+        'date',
+        'category_id',
+    ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
+    protected $casts = [
+        'tags' => 'array',
+        'date' => 'date',
+    ];
 }

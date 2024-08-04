@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Quote;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class QuotesSeeder extends Seeder
 {
@@ -12,21 +12,23 @@ class QuotesSeeder extends Seeder
      */
     public function run(): void
     {
-        Quote::create([
-            'quote' => 'The only limit to our realization of tomorrow is our doubts of today.',
-            'author' => 'Franklin D. Roosevelt',
-            'category_id' => 1,
-        ]);
-        Quote::create([
-            'quote' => 'Life is what happens when you’re busy making other plans.',
-            'author' => 'John Lennon',
-            'category_id' => 2,
-        ]);
-        Quote::create([
-            'quote' => 'Love the life you live. Live the life you love.',
-            'author' => 'Bob Marley',
-            'category_id' => 3,
-        ]);
+        $quotes = [
+            [
+                'quote' => 'Do not worry if you have built your castles in the air. They are where they should be. Now put the foundations under them.',
+                'author' => 'Henry David Thoreau',
+                'length' => 122,
+                'language' => 'en',
+                'tags' => json_encode(['worry', 'dreams', 'inspire', 'air']),
+                'permalink' => 'https://theysaidso.com/quote/henry-david-thoreau-do-not-worry-if-you-have-built-your-castles-in-the-air-they',
+                'title' => 'Inspiring Quote of the Day',
+                'background' => 'https://theysaidso.com/assets/images/qod/qod-inspire.jpg',
+                'date' => '2024-08-04',
+                'category_id' => 1,
+            ],
+        ];
+        foreach ($quotes as $quote) {
+            DB::table('quotes')->insert($quote);
+        }
 
     }
 }
