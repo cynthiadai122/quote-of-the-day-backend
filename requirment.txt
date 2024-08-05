@@ -31,3 +31,7 @@ A zip file with:
 1. Laravel project
 2. Vue.js project
 3. Text file with instructions to build and run both projects
+
+
+// get all the categories and put it into database
+//

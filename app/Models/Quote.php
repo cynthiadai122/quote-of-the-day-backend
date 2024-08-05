@@ -31,4 +31,18 @@ class Quote extends Model
         'tags' => 'array',
         'date' => 'date',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->created_at = now();
+            $model->updated_at = now();
+        });
+
+        static::updating(function ($model) {
+            $model->updated_at = now();
+        });
+    }
 }
