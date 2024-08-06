@@ -17,6 +17,7 @@ class QuoteService
     {
         $this->client = $client;
         $this->apiKey = env('THEYSAIDSO_API_KEY');
+        Log::info('Loaded API Key: '.$this->apiKey);
     }
 
     public function getQuoteOfTheDay($category = 'inspire')

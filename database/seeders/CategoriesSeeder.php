@@ -13,8 +13,13 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         // Ensure that IDs are auto-incremented if not explicitly setting them
-        Category::create(['name' => 'Inspirational']);
-        Category::create(['name' => 'Life']);
-        Category::create(['name' => 'Love']);
+        Category::create(['name' => 'inspire']);
+        Category::create(['name' => 'life']);
+        Category::create(['name' => 'love']);
+        Category::create(['name' => 'management']);
+        Category::create(['name' => 'sports']);
+        Category::create(['name' => 'funny']);
+        Category::create(['name' => 'art']);
+        Category::create(['name' => 'students']);
     }
 }
