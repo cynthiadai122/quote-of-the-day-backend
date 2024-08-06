@@ -10,7 +10,6 @@ use App\Services\QuoteService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Mockery;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class QuoteControllerTest extends TestCase
