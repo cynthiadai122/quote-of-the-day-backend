@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Jobs\UpdateDailyQuotes;
+use App\Services\QuoteService;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -26,4 +29,9 @@ class Kernel extends HttpKernel
         // Other route middleware...
         'auth:sanctum' => \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->job(new UpdateDailyQuotes(app(QuoteService::class)))->daily();
+    }
 }

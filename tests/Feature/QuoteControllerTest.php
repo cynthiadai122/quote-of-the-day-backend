@@ -85,7 +85,7 @@ class QuoteControllerTest extends TestCase
             'title' => 'Title',
             'background' => 'http://example.com/background.jpg',
             'date' => Carbon::now()->toDateString(),
-            'category_id' => $category->id, // Use the valid category ID
+            'category_id' => $category->id,
             'api_id' => 'unique-api-id',
         ]);
 
@@ -124,7 +124,7 @@ class QuoteControllerTest extends TestCase
             'title' => 'Title',
             'background' => 'http://example.com/background.jpg',
             'date' => Carbon::now()->toDateString(),
-            'category_id' => $category->id, // Use the valid category ID
+            'category_id' => $category->id,
             'api_id' => 'unique-api-id',
         ]);
 
