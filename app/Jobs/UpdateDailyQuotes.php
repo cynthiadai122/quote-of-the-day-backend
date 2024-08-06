@@ -47,12 +47,8 @@ class UpdateDailyQuotes implements ShouldQueue
             }
 
             $quote = $this->quoteService->getQuoteOfTheDay($category);
-
             if ($quote) {
-                $user->quotes()->updateOrCreate(
-                    ['created_at' => $today],
-                    ['quote_id' => $quote->id]
-                );
+                $user->quotes()->attach($quote->id);
             } else {
                 Log::error("Error fetching quote for category '{$category}'");
             }
