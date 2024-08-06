@@ -27,7 +27,7 @@ class QuoteController extends Controller
             ->first();
 
         if ($userQuote) {
-            $quote = $userQuote->quote;
+            $quote = $userQuote;
         } else {
             $favoriteCategories = $request->user()->favoriteCategories->pluck('name')->toArray();
             if (empty($favoriteCategories)) {
