@@ -12,6 +12,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/quote-of-the-day', [QuoteController::class, 'quoteOfTheDay']);
+Route::get('/missed-quotes', [QuoteController::class, 'missedQuotes']);
 Route::post('/favorite/toggle', [FavoriteController::class, 'toggleFavorite']);
 Route::post('/favorite/toggle', [FavoriteController::class, 'toggleFavorite']);
 Route::get('/user/categories', [UserCategoryController::class, 'getUserCategory']);
