@@ -50,6 +50,21 @@ class FavoriteControllerTest extends TestCase
             'user_id' => $user->id,
             'quote_id' => $quote->id,
         ]);
+    }
 
+    public function test_authenticated_user_can_get_favorites()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
+        $quote = Quote::factory()->create();
+        Favorite::create([
+            'user_id' => $user->id,
+            'quote_id' => $quote->id,
+        ]);
+
+        $response = $this->getJson('/api/favorites');
+        $response->assertStatus(200);
+        $response->assertJsonCount(1);
     }
 }
