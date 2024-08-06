@@ -14,6 +14,6 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/quote-of-the-day', [QuoteController::class, 'quoteOfTheDay']);
 Route::get('/missed-quotes', [QuoteController::class, 'missedQuotes']);
 Route::post('/favorite/toggle', [FavoriteController::class, 'toggleFavorite']);
-Route::get('/favorites', [FavoriteController::class, 'getFavorites']);;
+Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
 Route::get('/user/categories', [UserCategoryController::class, 'getUserCategory']);
 Route::post('/user/categories', [UserCategoryController::class, 'update']);

@@ -10,7 +10,7 @@ class FavoriteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only('toggleFavorite','getFavorites');
+        $this->middleware('auth:sanctum')->only('toggleFavorite', 'getFavorites');
     }
 
     public function toggleFavorite(Request $request)
@@ -44,14 +44,14 @@ class FavoriteController extends Controller
     public function getFavorites(Request $request)
     {
         $user = $request->user();
-    
+
         $favorites = Favorite::where('user_id', $user->id)
             ->with('quote')
             ->get()
             ->map(function ($favorite) {
                 return $favorite->quote;
             });
-    
+
         return response()->json(['data' => $favorites]);
     }
 }

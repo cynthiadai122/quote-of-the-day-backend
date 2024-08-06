@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Quote;
+
 class Favorite extends Model
 {
     use HasFactory;
 
     protected $fillable = ['user_id', 'quote_id'];
-
 
     public function quote()
     {
