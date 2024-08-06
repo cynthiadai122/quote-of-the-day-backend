@@ -7,6 +7,7 @@ use App\Services\QuoteService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Mockery;
 use Tests\TestCase;
 
@@ -28,6 +29,7 @@ class QuoteServiceTest extends TestCase
 
     public function test_get_quote_of_the_day_saves_to_database_and_returns_quote()
     {
+        $id = (string) Str::uuid();
         $mockResponse = new Response(
             200,
             [],
@@ -45,6 +47,7 @@ class QuoteServiceTest extends TestCase
                             'background' => 'http://example.com/image.jpg',
                             'date' => '2024-08-04',
                             'category' => 'inspire',
+                            'id' => $id,
                         ],
                     ],
                 ],
@@ -81,6 +84,7 @@ class QuoteServiceTest extends TestCase
             'background' => 'http://example.com/image.jpg',
             'date' => '2024-08-04',
             'category_id' => $category->id,
+            'api_id' => $id,
         ]);
     }
 

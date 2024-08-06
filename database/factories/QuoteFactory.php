@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Quote>
@@ -27,6 +28,7 @@ class QuoteFactory extends Factory
             'background' => $this->faker->imageUrl,
             'date' => $this->faker->date,
             'category_id' => \App\Models\Category::factory(),
+            'api_id' => (string) Str::uuid(),
         ];
     }
 }

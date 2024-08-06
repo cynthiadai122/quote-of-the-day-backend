@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('background');
             $table->date('date');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('api_id')->unique();
             $table->timestamps();
         });
     }

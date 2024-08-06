@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class QuotesSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class QuotesSeeder extends Seeder
                 'background' => 'https://theysaidso.com/assets/images/qod/qod-inspire.jpg',
                 'date' => '2024-08-04',
                 'category_id' => 1,
+                'api_id' => (string) Str::uuid(),
             ],
         ];
         foreach ($quotes as $quote) {

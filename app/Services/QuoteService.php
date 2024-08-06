@@ -41,6 +41,11 @@ class QuoteService
             $quoteData = $data['contents']['quotes'][0] ?? null;
 
             if ($quoteData) {
+                $existingQuote = Quote::where('api_id', $quoteData['id'])->first();
+
+                if ($existingQuote) {
+                    return $existingQuote;
+                }
                 $quote = Quote::create([
                     'quote' => $quoteData['quote'],
                     'author' => $quoteData['author'],
@@ -52,6 +57,7 @@ class QuoteService
                     'background' => $quoteData['background'],
                     'date' => $quoteData['date'],
                     'category_id' => $this->getCategoryId($quoteData['category']),
+                    'api_id' => $quoteData['id'],
                 ]);
 
                 return $quote;

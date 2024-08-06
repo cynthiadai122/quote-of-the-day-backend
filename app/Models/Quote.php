@@ -20,11 +20,19 @@ class Quote extends Model
         'background',
         'date',
         'category_id',
+        'api_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_quote')
+            ->using(UserQuote::class)
+            ->withTimestamps();
     }
 
     protected $casts = [
