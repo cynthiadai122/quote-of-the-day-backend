@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Category;
-use App\Models\UserQuote;
 use App\Services\QuoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -23,8 +22,8 @@ class QuoteController extends Controller
     {
         $today = Carbon::now()->format('Y-m-d');
         $user = $request->user();
-        $userQuote = UserQuote::where('user_id', $user->id)
-            ->whereDate('created_at', $today)
+        $userQuote = $user->quotes()
+            ->whereDate('user_quotes.created_at', $today)
             ->first();
 
         if ($userQuote) {
@@ -44,6 +43,12 @@ class QuoteController extends Controller
             }
 
             $quote = $this->quoteService->getQuoteOfTheDay($category);
+            if (! $quote) {
+                return response()->json([
+                    'error' => 'No quote found for today. Please try again later.',
+                ], 404);
+            }
+
             $user->quotes()->attach($quote->id);
         }
 

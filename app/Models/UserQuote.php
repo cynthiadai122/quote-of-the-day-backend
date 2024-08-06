@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class UserQuote extends Pivot
+class UserQuote extends Model
 {
     protected $table = 'user_quotes';
 

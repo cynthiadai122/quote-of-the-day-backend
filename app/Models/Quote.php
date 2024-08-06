@@ -30,9 +30,7 @@ class Quote extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_quotes')
-            ->using(UserQuote::class)
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_quotes');
     }
 
     protected $casts = [

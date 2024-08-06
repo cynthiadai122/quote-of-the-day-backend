@@ -31,9 +31,7 @@ class User extends Authenticatable
 
     public function quotes()
     {
-        return $this->belongsToMany(Quote::class, 'user_quotes')
-            ->using(UserQuote::class)
-            ->withTimestamps();
+        return $this->belongsToMany(Quote::class, 'user_quotes');
     }
 
     protected function casts(): array
