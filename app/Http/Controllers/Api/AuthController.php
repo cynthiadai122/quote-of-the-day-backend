@@ -47,7 +47,7 @@ class AuthController extends Controller
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
-
+        $user->previous_login = $user->last_login;
         $user->last_login = now();
         $user->save();
 

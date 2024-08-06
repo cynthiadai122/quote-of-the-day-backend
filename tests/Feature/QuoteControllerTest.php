@@ -166,7 +166,8 @@ class QuoteControllerTest extends TestCase
     public function test_missed_quotes()
     {
         $user = User::factory()->create([
-            'last_login' => now()->subDays(2),
+            'last_login' => now(),
+            'previous_login' => now()->subDays(2),
         ]);
     
         $category = Category::create(['name' => 'inspire']);

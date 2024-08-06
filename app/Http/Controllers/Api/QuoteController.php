@@ -58,14 +58,14 @@ class QuoteController extends Controller
     public function missedQuotes(Request $request)
     {
         $user = $request->user();
-        $lastLogin = $user->last_login;
+        $previous_login = $user->previous_login;
 
-        if (! $lastLogin) {
+        if (! $previous_login) {
             return response()->json([]);
         }
 
         $missedQuotes = $user->quotes()
-            ->where('user_quotes.created_at', '>', $lastLogin)
+            ->where('user_quotes.created_at', '>', $previous_login)
             ->get();
 
         return response()->json($missedQuotes);
