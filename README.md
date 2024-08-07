@@ -91,7 +91,13 @@ DB_PASSWORD=secret
 composer install
 ```
 
-## Step 6: Start the Laravel Development Server
+## Step 6: Migrate and Seed Data
+
+```sh
+php artisan migrate && php artisan db:seed
+```
+
+## Step 7: Start the Laravel Development Server
 
 ```sh
 php artisan serve

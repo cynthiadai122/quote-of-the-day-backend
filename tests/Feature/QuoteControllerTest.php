@@ -9,6 +9,7 @@ use App\Models\UserQuote;
 use App\Services\QuoteService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Mockery;
 use Tests\TestCase;
 
@@ -205,7 +206,7 @@ class QuoteControllerTest extends TestCase
             'updated_at' => now()->subDay(),
         ]);
 
-        \DB::table('user_quotes')->insert([
+        DB::table('user_quotes')->insert([
             ['user_id' => $user->id, 'quote_id' => $quoteRecord1->id, 'created_at' => now()->subDays(1), 'updated_at' => now()->subDays(1)],
             ['user_id' => $user->id, 'quote_id' => $quoteRecord2->id, 'created_at' => now()->subDay(), 'updated_at' => now()->subDay()],
         ]);

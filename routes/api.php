@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\UserCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/quote-of-the-day', [QuoteController::class, 'quoteOfTheDay']);
