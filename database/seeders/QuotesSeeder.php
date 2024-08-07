@@ -40,7 +40,7 @@ class QuotesSeeder extends Seeder
                 'tags' => json_encode(['inspire', 'self-respect', 'stress']),
                 'permalink' => 'https://theysaidso.com/quote/steve-maraboli-if-you-respect-yourself-in-stressful-situations-it-will-help-you',
                 'title' => 'Inspiring Quote of the Day',
-                'background' => 'https://theysaidso.com/img/bgs/man_on_the_mountain.jpg',
+                'background' => 'https://theysaidso.com/assets/images/qod/qod-love.jpg',
                 'date' => $today,
                 'category_id' => 1,
                 'api_id' => 'nwW3g7V0xszGDNIehz6yTgeF',

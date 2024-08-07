@@ -78,7 +78,7 @@ class QuoteServiceTest extends TestCase
             'author' => 'Sample author',
             'length' => 123,
             'language' => 'en',
-            'tags' => json_encode(['tag1', 'tag2']),
+            'tags' => ['tag1', 'tag2'],
             'permalink' => 'http://example.com',
             'title' => 'Sample title',
             'background' => 'http://example.com/image.jpg',

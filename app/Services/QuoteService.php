@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Quote;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -52,13 +53,14 @@ class QuoteService
                     'author' => $quoteData['author'],
                     'length' => $quoteData['length'],
                     'language' => $quoteData['language'],
-                    'tags' => json_encode($quoteData['tags']),
+                    'tags' => $quoteData['tags'],
                     'permalink' => $quoteData['permalink'],
                     'title' => $quoteData['title'],
                     'background' => $quoteData['background'],
                     'date' => $quoteData['date'],
                     'category_id' => $this->getCategoryId($quoteData['category']),
                     'api_id' => $quoteData['id'],
+                    'created_at' => Carbon::now(),
                 ]);
 
                 return $quote;
