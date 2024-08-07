@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/user', [AuthController::class, 'user']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/quote-of-the-day', [QuoteController::class, 'quoteOfTheDay']);
 Route::get('/missed-quotes', [QuoteController::class, 'missedQuotes']);

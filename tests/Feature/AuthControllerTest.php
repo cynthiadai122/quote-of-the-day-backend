@@ -120,4 +120,22 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    public function it_returns_authenticated_user()
+    {
+        $user = User::factory()->create([
+            'password' => Hash::make('password'),
+        ]);
+
+        Sanctum::actingAs($user);
+
+        $response = $this->getJson('/api/user');
+
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ]);
+    }
 }
