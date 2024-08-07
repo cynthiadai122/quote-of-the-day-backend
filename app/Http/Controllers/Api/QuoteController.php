@@ -7,6 +7,7 @@ use App\Services\QuoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class QuoteController extends Controller
 {
@@ -15,7 +16,7 @@ class QuoteController extends Controller
     public function __construct(QuoteService $quoteService)
     {
         $this->quoteService = $quoteService;
-        $this->middleware('auth:sanctum')->only('quoteOfTheDay');
+        $this->middleware('auth:sanctum')->only('quoteOfTheDay', 'missedQuotes');
     }
 
     public function quoteOfTheDay(Request $request)
@@ -58,6 +59,7 @@ class QuoteController extends Controller
     public function missedQuotes(Request $request)
     {
         $user = $request->user();
+        Log::info($user);
         $previous_login = $user->previous_login;
 
         if (! $previous_login) {

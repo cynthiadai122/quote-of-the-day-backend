@@ -24,7 +24,7 @@ class UserCategorySeeder extends Seeder
         ];
 
         foreach ($userCategories as $userCategory) {
-            DB::table('user_category')->insert($userCategory);
+            DB::table('user_categories')->insert($userCategory);
         }
     }
 }

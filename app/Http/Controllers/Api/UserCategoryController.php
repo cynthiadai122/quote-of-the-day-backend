@@ -19,7 +19,9 @@ class UserCategoryController extends Controller
         $user = $request->user();
         $categories = $user->favoriteCategories;
 
-        return response()->json($categories);
+        return response()->json($categories->map(function ($category) {
+            return $category->only(['id', 'name']);
+        }));
     }
 
     public function update(Request $request)

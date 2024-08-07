@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CategoriesSeeder::class);
         $this->call(QuotesSeeder::class);
+        $this->call(UserCategorySeeder::class);
+        $this->call(UserQuoteSeeder::class);
+        $this->call(UserFavoriteSeeder::class);
     }
 }

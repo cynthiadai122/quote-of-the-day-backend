@@ -24,7 +24,7 @@ class UserFavoriteSeeder extends Seeder
         ];
 
         foreach ($userFavorites as $userFavorite) {
-            DB::table('user_favorites')->insert($userFavorite);
+            DB::table('favorites')->insert($userFavorite);
         }
     }
 }

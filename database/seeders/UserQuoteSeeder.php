@@ -16,15 +16,17 @@ class UserQuoteSeeder extends Seeder
             [
                 'user_id' => 1,
                 'quote_id' => 1,
+                'created_at' => now()->subDays(1),
             ],
             [
                 'user_id' => 1,
                 'quote_id' => 2,
+                'created_at' => now()->subDays(2),
             ],
         ];
 
         foreach ($userQuotes as $userQuote) {
-            DB::table('user_quote')->insert($userQuote);
+            DB::table('user_quotes')->insert($userQuote);
         }
     }
 }
