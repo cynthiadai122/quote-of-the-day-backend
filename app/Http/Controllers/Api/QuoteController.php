@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Services\QuoteService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,7 +17,7 @@ class QuoteController extends Controller
     public function __construct(QuoteService $quoteService)
     {
         $this->quoteService = $quoteService;
-        $this->middleware('auth:sanctum')->only('quoteOfTheDay', 'missedQuotes');
+        $this->middleware('auth:sanctum')->only('quoteOfTheDay', 'missedQuotes', 'isFavorite');
     }
 
     public function quoteOfTheDay(Request $request)
@@ -71,5 +72,15 @@ class QuoteController extends Controller
             ->get();
 
         return response()->json($missedQuotes);
+    }
+
+    public function isFavorite(Request $request, $id)
+    {
+        $user = $request->user();
+        $isFavorite = Favorite::where('user_id', $user->id)
+            ->where('quote_id', $id)
+            ->exists();
+
+        return response()->json(['is_favorite' => $isFavorite]);
     }
 }

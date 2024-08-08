@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('author');
             $table->integer('length');
             $table->string('language');
-            $table->json('tags');
+            $table->string('tags');
             $table->string('permalink');
             $table->string('title');
             $table->string('background');

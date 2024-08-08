@@ -67,4 +67,33 @@ class FavoriteControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonCount(1);
     }
+
+    public function test_quote_is_favorite()
+    {
+        $user = User::factory()->create();
+        $quote = Quote::factory()->create();
+
+        Favorite::create([
+            'user_id' => $user->id,
+            'quote_id' => $quote->id,
+        ]);
+
+        $response = $this->actingAs($user, 'sanctum')
+            ->getJson("/api/quote/{$quote->id}/is-favorite");
+
+        $response->assertStatus(200)
+            ->assertJson(['is_favorite' => true]);
+    }
+
+    public function test_quote_is_not_favorite()
+    {
+        $user = User::factory()->create();
+        $quote = Quote::factory()->create();
+
+        $response = $this->actingAs($user, 'sanctum')
+            ->getJson("/api/quote/{$quote->id}/is-favorite");
+
+        $response->assertStatus(200)
+            ->assertJson(['is_favorite' => false]);
+    }
 }

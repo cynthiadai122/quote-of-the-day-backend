@@ -18,3 +18,4 @@ Route::post('/favorite/toggle', [FavoriteController::class, 'toggleFavorite']);
 Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
 Route::get('/user/categories', [UserCategoryController::class, 'getUserCategory']);
 Route::post('/user/categories', [UserCategoryController::class, 'update']);
+Route::get('quote/{id}/is-favorite', [QuoteController::class, 'isFavorite']);
