@@ -18,6 +18,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'last_login' => Carbon::now()->subDays(2),
         ]);
-        User::factory()->count(10)->create();
+        User::factory()->count(3)->create();
     }
 }

@@ -13,13 +13,13 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         // Ensure that IDs are auto-incremented if not explicitly setting them
-        Category::create(['name' => 'inspire']);
-        Category::create(['name' => 'life']);
-        Category::create(['name' => 'love']);
-        Category::create(['name' => 'management']);
-        Category::create(['name' => 'sports']);
-        Category::create(['name' => 'funny']);
-        Category::create(['name' => 'art']);
-        Category::create(['name' => 'students']);
+        Category::create(['name' => 'inspire', 'image' => 'https://theysaidso.com/assets/images/qod/qod-inspire.jpg']);
+        Category::create(['name' => 'life', 'image' => 'https://theysaidso.com/assets/images/qod/qod-life.jpg']);
+        Category::create(['name' => 'love', 'image' => 'https://theysaidso.com/assets/images/qod/qod-love.jpg']);
+        Category::create(['name' => 'management', 'image' => 'https://theysaidso.com/assets/images/qod/qod-management.jpg']);
+        Category::create(['name' => 'sports', 'image' => 'https://theysaidso.com/assets/images/qod/qod-sports.jpg']);
+        Category::create(['name' => 'funny', 'image' => 'https://theysaidso.com/assets/images/qod/qod-funny.jpg']);
+        Category::create(['name' => 'art', 'image' => 'https://theysaidso.com/assets/images/qod/qod-art.jpg']);
+        Category::create(['name' => 'students', 'image' => 'https://theysaidso.com/assets/images/qod/qod-students.jpg']);
     }
 }
