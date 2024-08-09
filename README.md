@@ -112,7 +112,7 @@ DB_HOST=db
 ## Step 2: Build docker image
 
 ```sh
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 ### Run Laravel Migrations
@@ -121,8 +121,14 @@ docker-compose up --build
 docker-compose exec app php artisan migrate
 ```
 
-### Run project
+### Run seed data
 
 ```sh
-docker-compose exec app php artisan migrate
+docker-compose exec app php artisan db:seed
+```
+
+### Start the Laravel Development Server
+
+```sh
+docker-compose exec app php artisan serve
 ```
