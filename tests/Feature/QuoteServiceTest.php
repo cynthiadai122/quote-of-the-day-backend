@@ -73,6 +73,7 @@ class QuoteServiceTest extends TestCase
 
         $this->assertNotNull($quote);
         $this->assertEquals('Sample quote', $quote->quote);
+
         $this->assertDatabaseHas('quotes', [
             'quote' => 'Sample quote',
             'author' => 'Sample author',

@@ -51,7 +51,10 @@ class QuoteController extends Controller
                 ], 404);
             }
 
-            $user->quotes()->attach($quote->id);
+            $user->quotes()->attach($quote->id, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
         return response()->json($quote);
