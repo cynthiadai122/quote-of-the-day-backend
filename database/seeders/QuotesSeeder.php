@@ -27,7 +27,7 @@ class QuotesSeeder extends Seeder
                 'permalink' => 'https://theysaidso.com/quote/henry-david-thoreau-do-not-worry-if-you-have-built-your-castles-in-the-air-they',
                 'title' => 'Inspiring Quote of the Day',
                 'background' => 'https://theysaidso.com/assets/images/qod/qod-inspire.jpg',
-                'date' => '2024-08-04',
+                'date' => $today,
                 'category_id' => 1,
                 'api_id' => (string) Str::uuid(),
             ],
@@ -43,7 +43,23 @@ class QuotesSeeder extends Seeder
                 'background' => 'https://theysaidso.com/assets/images/qod/qod-love.jpg',
                 'date' => $today,
                 'category_id' => 1,
-                'api_id' => 'nwW3g7V0xszGDNIehz6yTgeF',
+                'api_id' => (string) Str::uuid(),
+
+            ],
+            [
+                'id' => 3,
+                'quote' => 'II spent a year in that town, one Sunday.',
+                'author' => 'George Burns',
+                'length' => 40,
+                'language' => 'en',
+                'tags' => json_encode(['funny']),
+                'permalink' => 'https://theysaidso.com/quote/steve-maraboli-if-you-respect-yourself-in-stressful-situations-it-will-help-you',
+                'title' => 'Funnt Quote of the Day',
+                'background' => 'https://theysaidso.com/assets/images/qod/qod-funny.jpg',
+                'date' => $today,
+                'category_id' => 6,
+                'api_id' => (string) Str::uuid(),
+
             ],
         ];
 
