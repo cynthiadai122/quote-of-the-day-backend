@@ -84,6 +84,7 @@ DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel
 DB_PASSWORD=secret
+HEYSAIDSO_API_KEY=API_KEY
 
 ## Step 5: Install Dependencies
 
@@ -102,6 +103,17 @@ php artisan migrate && php artisan db:seed
 ```sh
 php artisan serve
 ```
+
+## Step 8 (optional):
+
+## Test account:
+
+email: test@gmail.com
+password: password
+
+if error show in home page
+An error occurred while fetching the quote of the day.
+this is api call only available five times per day
 
 ### option 2: run with docker
 
@@ -131,4 +143,18 @@ docker-compose exec app php artisan db:seed
 
 ```sh
 docker-compose exec app php artisan serve
+```
+
+### Other scripts
+
+Run lint
+
+```sh
+./vendor/bin/pint
+```
+
+Run test
+
+```sh
+php artisan test
 ```
