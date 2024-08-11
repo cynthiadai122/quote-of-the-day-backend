@@ -13,7 +13,7 @@ This guide will walk you through setting up a local development environment for 
 
 ```sh
 git clone git@github.com:cynthiadai122/quote-of-the-day-backend.git
-cd uote-of-the-day-backend
+cd quote-of-the-day-backend
 ```
 
 ## Step 2: Install and Configure phpenv
