@@ -18,14 +18,36 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Install Composer
-COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+#Mine
 
-# Copy the existing application directory contents to the working directory
-COPY . .
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-dev
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
+
+# Copy composer.lock and composer.json files
+COPY composer.lock composer.json /var/www/
+
+# Install PHP dependencies
+RUN composer install --no-scripts --no-autoloader
+
+
+# Copy existing application directory contents
+COPY . /var/www
+
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
+
+
+# Run composer again to optimize autoloading (Optional)
+RUN composer dump-autoload --optimize
+
+# Change current user to www
+USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

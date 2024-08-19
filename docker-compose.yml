@@ -13,7 +13,7 @@ services:
             - .:/var/www
             - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
-            - laravel
+            - app-network
         environment:
             - APP_ENV=local
             - APP_DEBUG=true
@@ -37,26 +37,26 @@ services:
         volumes:
             - dbdata:/var/lib/mysql
         networks:
-            - laravel
+            - app-network
         ports:
             - "3306:3306"
 
     webserver:
         image: nginx:alpine
-        container_name: laravel-web
+        container_name: webserver
         restart: unless-stopped
+        tty: true
         ports:
-            - "8000:80"
+            - "8989:80"
+            - "443:443"
         volumes:
-            - .:/var/www
-            - ./docker/nginx/conf.d:/etc/nginx/conf.d
+            - ./:/var/www
+            - ./nginx/:/etc/nginx/conf.d/
         networks:
-            - laravel
-        depends_on:
-            - app
+            - app-network
 
 volumes:
     dbdata:
 
 networks:
-    laravel:
+    app-network:
